@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/es/integration/react';
 import {store, persistor} from './src/store';
 
-import MainStack from './src/stacks/MainStack';
+import MainStack from './src/navigations/MainStack';
 
 export default () => (
   <Provider store={store}>
