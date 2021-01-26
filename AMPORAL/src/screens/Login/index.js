@@ -2,12 +2,13 @@
 import React from 'react';
 import {Container} from './styled';
 import Lottie from 'lottie-react-native';
+import {Platform} from 'react-native';
 
 import mathTeatcher from '../../assets/mathTeacher.json';
 
 const Page = () => {
   return (
-    <Container>
+    <Container behavior={Platform.OS === 'ios' ? 'padding' : null}>
       <Lottie
         style={{width: '80%'}}
         resizeMode="contain"
