@@ -189,6 +189,8 @@ dependencies {
 
     implementation project(':lottie-react-native')
 
+    compile project(':react-native-navbar-color')
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }
