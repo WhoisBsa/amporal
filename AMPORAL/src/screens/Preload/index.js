@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Lottie from 'lottie-react-native';
 
 import mathTeatcher from '../../assets/mathTeacher.json';
+import {Container, LoadingIcon} from './styled';
 
 const Preload = (props) => {
   if (!props.token) {
@@ -24,13 +25,17 @@ const Preload = (props) => {
     );
   }
   return (
-    <Lottie
-      style={{width: '80%'}}
-      resizeMode="contain"
-      source={mathTeatcher}
-      autoPlay
-      loop
-    />
+    <Container>
+      <Lottie
+        style={{width: '80%'}}
+        resizeMode="contain"
+        source={mathTeatcher}
+        autoPlay
+        loop
+      />
+
+      <LoadingIcon size="large" color="#34F692" />
+    </Container>
   );
 };
 
