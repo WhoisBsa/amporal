@@ -30,6 +30,18 @@ export const Input = styled.TextInput`
   padding-left: 10px;
 `;
 
+export const ForgotPasswordButton = styled.TouchableHighlight`
+  width: 50%;
+  align-self: flex-end;
+  align-items: flex-end;
+`;
+
+export const ForgotPasswordText = styled.Text`
+  color: ${DARK};
+  text-decoration-line: underline;
+  font-size: 12px;
+`;
+
 export const ActionButtonArea = styled.TouchableHighlight`
   background-color: ${SECONDARY};
   border-radius: 10px;
@@ -45,3 +57,19 @@ export const ActionButtonText = styled.Text`
   color: ${DARK};
   font-weight: bold;
 `;
+
+export const SigninArea = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10%;
+`;
+
+export const SigninText = styled.Text`
+  color: ${DARK};
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration-line: ${(props) => props.subli || 'none'};
+`;
+
+export const SigninButton = styled.TouchableHighlight``;
