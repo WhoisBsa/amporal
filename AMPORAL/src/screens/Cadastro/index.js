@@ -10,13 +10,14 @@ import {
 } from './styled';
 import Lottie from 'lottie-react-native';
 import {Platform} from 'react-native';
+import {connect} from 'react-redux';
 
 import mathTeatcher from '../../assets/mathTeacher.json';
+import {DARK, LIGHT} from '../../styles/colors';
 
 const Page = () => {
   return (
     <Container behavior={Platform.OS === 'ios' ? 'padding' : null}>
-      <Label size="28">Bem-vindo(a) ao AMPORAL!</Label>
       <Lottie
         style={{width: '80%', marginBottom: -30}}
         resizeMode="contain"
@@ -40,4 +41,23 @@ const Page = () => {
   );
 };
 
-export default Page;
+Page.navigationOptions = ({navigation}) => {
+  return {
+    title: 'Criar uma conta',
+    headerShown: true,
+    headerStyle: {
+      backgroundColor: LIGHT,
+      borderBottomRightRadius: 50,
+    },
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page);
