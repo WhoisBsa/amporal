@@ -7,7 +7,8 @@ import mathTeatcher from '../../assets/mathTeacher.json';
 import {Container, LoadingIcon} from './styled';
 
 const Preload = (props) => {
-  if (!props.token) {
+  console.log(props.token, props);
+  if (props.token) {
     // LOGIN
     props.navigation.dispatch(
       StackActions.reset({
@@ -20,7 +21,7 @@ const Preload = (props) => {
     props.navigation.dispatch(
       StackActions.reset({
         index: 0,
-        actions: [NavigationActions.navigate({routeName: 'HomeStack'})],
+        actions: [NavigationActions.navigate({routeName: 'AppTab'})],
       }),
     );
   }
@@ -42,6 +43,7 @@ const Preload = (props) => {
 const mapStateToProps = (state) => {
   return {
     token: state.userReducer.token,
+    name: state.userReducer.name,
   };
 };
 

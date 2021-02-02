@@ -4,7 +4,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import Preload from '../screens/Preload';
 import Login from '../screens/Login';
 import Cadastro from '../screens/Cadastro';
-// import HomeStack from './HomeStack';
+import AppTab from './AppTab';
 
 export default createAppContainer(
   createStackNavigator(
@@ -12,7 +12,7 @@ export default createAppContainer(
       Preload,
       Login,
       Cadastro,
-      // HomeStack,
+      AppTab,
     },
     {
       initialRouteName: 'Preload',

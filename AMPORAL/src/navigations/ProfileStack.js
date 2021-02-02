@@ -1,17 +1,17 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import Home from '../screens/Home';
+import Profile from '../screens/Profile';
 // import Settings from '../screens/Settings';
 
 export default createAppContainer(
   createStackNavigator(
     {
-      Home,
+      Profile,
       // Settings,
     },
     {
-      initialRouteName: 'Home',
+      initialRouteName: 'Profile',
       defaultNavigationOptions: {
         headerShown: true,
         cardStyle: {backgroundColor: '#FFF'},
