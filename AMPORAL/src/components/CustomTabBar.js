@@ -17,13 +17,7 @@ const TabBarItem = styled.View`
 
 const TabRegular = styled.TouchableHighlight`
   align-items: center;
-`;
-
-const TabImage = styled.Image`
-  width: 25px;
-  height: 25px;
-  margin-top: 10px;
-  margin-bottom: 5px;
+  width: 100%;
 `;
 
 const TabBall = styled.TouchableHighlight`
