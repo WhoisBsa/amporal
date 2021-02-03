@@ -1,15 +1,30 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components/native';
-import {View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Lottie from 'lottie-react-native';
+
+import laptopWorking from '../../assets/laptop-working.json';
+import {Container, Header, StartButton, StartText} from './styled';
 import {LIGHT} from '../../styles/colors';
 
 const Page = (props) => {
   return (
-    <View>
-      <Text>Testando Home Screen</Text>
-    </View>
+    <Container>
+      <Header>NUNCA FOI TÃO FÁCIL APRENDER MATEMÁTICA</Header>
+
+      <StartButton>
+        <StartText>COMECE JÁ!</StartText>
+      </StartButton>
+
+      <Lottie
+        style={{width: '80%', alignSelf: 'center'}}
+        resizeMode="contain"
+        source={laptopWorking}
+        autoPlay
+        loop
+      />
+    </Container>
   );
 };
 
