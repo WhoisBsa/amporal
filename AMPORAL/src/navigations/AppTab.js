@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 import HomeStack from './HomeStack';
-// import AulasStack from './AulasStack';
+import AulasStack from './AulasStack';
 import ProfileStack from './ProfileStack';
 
 import CustomTabBar from '../components/CustomTabBar';
@@ -11,7 +11,7 @@ import {LIGHT} from '../styles/colors';
 const AppTab = createBottomTabNavigator(
   {
     HomeStack,
-    // AulasStack,
+    AulasStack,
     ProfileStack,
   },
   {
