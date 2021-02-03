@@ -7,8 +7,7 @@ import mathTeatcher from '../../assets/mathTeacher.json';
 import {Container, LoadingIcon} from './styled';
 
 const Preload = (props) => {
-  console.log(props.token, props);
-  if (props.token) {
+  if (!props.token) {
     // LOGIN
     props.navigation.dispatch(
       StackActions.reset({
@@ -44,7 +43,15 @@ const mapStateToProps = (state) => {
   return {
     token: state.userReducer.token,
     name: state.userReducer.name,
+    email: state.userReducer.email,
+    age: state.userReducer.age,
   };
 };
 
-export default connect(mapStateToProps)(Preload);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setName: (name) => dispatch({type: 'SET_NAME', payload: {name}}),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Preload);

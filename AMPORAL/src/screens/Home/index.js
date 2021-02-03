@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import styled from 'styled-components/native';
 import {View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -50,4 +51,12 @@ Page.navigationOptions = ({navigation}) => {
   };
 };
 
-export default Page;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page);
