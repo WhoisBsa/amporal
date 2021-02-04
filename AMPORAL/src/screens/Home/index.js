@@ -38,7 +38,7 @@ Page.navigationOptions = ({navigation}) => {
 
   const ConfigButton = () => {
     const btnAction = () => {
-      navigation.navigate('HomeConfig');
+      navigation.navigate('Settings');
     };
 
     return (

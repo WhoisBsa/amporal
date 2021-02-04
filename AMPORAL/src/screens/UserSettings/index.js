@@ -7,31 +7,12 @@ import {LIGHT} from '../../styles/colors';
 const Page = (props) => {
   return (
     <View>
-      <Text>Testando Profile Screen</Text>
+      <Text>Testando Settings Screen</Text>
     </View>
   );
 };
 
 Page.navigationOptions = ({navigation}) => {
-  const ConfigButtonArea = styled.TouchableHighlight`
-    width: 30px;
-    height: 30px;
-    justify-content: center;
-    align-items: center;
-  `;
-
-  const ConfigButton = () => {
-    const btnAction = () => {
-      navigation.navigate('Settings');
-    };
-
-    return (
-      <ConfigButtonArea onPress={btnAction} underlayColor="transparent">
-        <Icon name="settings-sharp" size={25} color={LIGHT} />
-      </ConfigButtonArea>
-    );
-  };
-
   return {
     title: 'AMPORAL',
     headerShown: true,
@@ -43,9 +24,12 @@ Page.navigationOptions = ({navigation}) => {
       color: '#EEF8FF',
       fontWeight: 'bold',
     },
-    headerRight: () => <ConfigButton />,
     headerRightContainerStyle: {
       marginRight: 20,
+    },
+    headerTintColor: '#EEF8FF',
+    cardStyle: {
+      backgroundColor: '#FFFFFF',
     },
   };
 };

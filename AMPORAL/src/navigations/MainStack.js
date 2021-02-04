@@ -5,6 +5,7 @@ import Preload from '../screens/Preload';
 import Login from '../screens/Login';
 import Cadastro from '../screens/Cadastro';
 import AppTab from './AppTab';
+import Settings from '../screens/UserSettings';
 
 export default createAppContainer(
   createStackNavigator(
@@ -13,6 +14,7 @@ export default createAppContainer(
       Login,
       Cadastro,
       AppTab,
+      Settings,
     },
     {
       initialRouteName: 'Preload',
