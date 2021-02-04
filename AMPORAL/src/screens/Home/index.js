@@ -13,7 +13,9 @@ const Page = (props) => {
     <Container>
       <Header>NUNCA FOI TÃO FÁCIL APRENDER MATEMÁTICA</Header>
 
-      <StartButton>
+      <StartButton
+        underlayColor="#0070e0"
+        onPress={() => props.navigation.navigate('Aulas')}>
         <StartText>COMECE JÁ!</StartText>
       </StartButton>
 
