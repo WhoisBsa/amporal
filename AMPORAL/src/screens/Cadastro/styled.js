@@ -45,3 +45,19 @@ export const ActionButtonText = styled.Text`
   color: ${DARK};
   font-weight: bold;
 `;
+
+export const SigninArea = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10%;
+`;
+
+export const SigninText = styled.Text`
+  color: ${DARK};
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration-line: ${(props) => props.subli || 'none'};
+`;
+
+export const SigninButton = styled.TouchableHighlight``;

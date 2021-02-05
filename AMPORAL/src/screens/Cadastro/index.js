@@ -7,6 +7,9 @@ import {
   ActionButtonArea,
   ActionButtonText,
   Label,
+  SigninArea,
+  SigninButton,
+  SigninText,
 } from './styled';
 import Lottie from 'lottie-react-native';
 import {Platform} from 'react-native';
@@ -15,7 +18,7 @@ import {connect} from 'react-redux';
 import mathTeatcher from '../../assets/mathTeacher.json';
 import {DARK, LIGHT} from '../../styles/colors';
 
-const Page = () => {
+const Page = (props) => {
   return (
     <Container behavior={Platform.OS === 'ios' ? 'padding' : null}>
       <Lottie
@@ -37,6 +40,15 @@ const Page = () => {
           <ActionButtonText>Cadastrar</ActionButtonText>
         </ActionButtonArea>
       </LoginArea>
+
+      <SigninArea>
+        <SigninText>Já possui uma conta? </SigninText>
+        <SigninButton
+          onPress={() => props.navigation.navigate('Login')}
+          underlayColor="transparent">
+          <SigninText subli="underline">Entrar</SigninText>
+        </SigninButton>
+      </SigninArea>
     </Container>
   );
 };
