@@ -18,14 +18,15 @@ import {Platform} from 'react-native';
 import {Alert} from 'react-native';
 import {connect} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
+import {StackActions, NavigationActions} from 'react-navigation';
 
 import Api from '../../Api';
 
 import mathTeatcher from '../../assets/mathTeacher.json';
 
 const Page = (props) => {
-  const [username, setUsername] = useState('matheus');
-  const [password, setPassword] = useState('SNDhiupS36jTqpT');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLoginClick = async () => {
     if (!username && !password) {
@@ -41,7 +42,12 @@ const Page = (props) => {
       props.setToken(json.token);
       props.setName(username);
       props.setPass(password);
-      props.navigation.navigate('AppTab');
+      props.navigation.dispatch(
+        StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({routeName: 'AppTab'})],
+        }),
+      );
     } else {
       Alert.alert('Erro de Login', 'Nome de usuário ou senha inválidos!');
     }
