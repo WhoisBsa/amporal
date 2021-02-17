@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
-import {View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {connect} from 'react-redux';
+
 import {LIGHT} from '../../styles/colors';
+import {Box, Container, DataView} from './styled';
 
 const Page = (props) => {
   return (
-    <View>
-      <Text>Testando Profile Screen</Text>
-    </View>
+    <Container>
+      <Box />
+
+      <DataView />
+    </Container>
   );
 };
 
@@ -50,4 +54,35 @@ Page.navigationOptions = ({navigation}) => {
   };
 };
 
-export default Page;
+const mapStateToProps = (state) => {
+  return {
+    token: state.userReducer.token,
+    name: state.userReducer.name,
+    password: state.userReducer.password,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setToken: (token) => dispatch({type: 'SET_TOKEN', payload: {token}}),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page);
+
+// const fetchHello = async () => {
+//   const req = await fetch(
+//     'http://portal-ensino.herokuapp.com/api/hello-protected/',
+//     {
+//       method: 'GET',
+//       headers: {
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//         Authorization: 'token ' + data.token,
+//       },
+//     },
+//   );
+//   const json = await req.json();
+//   setHello(json);
+// };
+// fetchHello();
