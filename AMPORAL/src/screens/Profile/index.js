@@ -69,20 +69,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);
-
-// const fetchHello = async () => {
-//   const req = await fetch(
-//     'http://portal-ensino.herokuapp.com/api/hello-protected/',
-//     {
-//       method: 'GET',
-//       headers: {
-//         Accept: 'application/json',
-//         'Content-Type': 'application/json',
-//         Authorization: 'token ' + data.token,
-//       },
-//     },
-//   );
-//   const json = await req.json();
-//   setHello(json);
-// };
-// fetchHello();
