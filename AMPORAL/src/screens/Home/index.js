@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components/native';
@@ -18,6 +19,10 @@ const Page = (props) => {
         onPress={() => props.navigation.navigate('Aulas')}>
         <StartText>COMECE JÁ!</StartText>
       </StartButton>
+
+      <Header>
+        Começe a aprender com as melhores videoaulas disponíveis!!!
+      </Header>
 
       <Lottie
         style={{width: '80%', alignSelf: 'center'}}
@@ -73,7 +78,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    signOut: () => dispatch({type: 'SIGNOUT_REQUEST'}),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);
