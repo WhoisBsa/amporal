@@ -16,4 +16,21 @@ export default {
     const json = await req.json();
     return json;
   },
+
+  signUp: async (username, email, password) => {
+    const req = await fetch(`${BASE_URL}/user/new/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+    const json = await req.json();
+    return json;
+  },
 };
