@@ -42,16 +42,11 @@ const Preload = (props) => {
 const mapStateToProps = (state) => {
   return {
     token: state.userReducer.token,
-    name: state.userReducer.name,
-    email: state.userReducer.email,
-    age: state.userReducer.age,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    setName: (name) => dispatch({type: 'SET_NAME', payload: {name}}),
-  };
+  return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Preload);
