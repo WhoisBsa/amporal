@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   Container,
   LoginArea,
@@ -14,8 +14,7 @@ import {
   SigninText,
 } from './styled';
 import Lottie from 'lottie-react-native';
-import {Platform} from 'react-native';
-import {Alert} from 'react-native';
+import {Platform, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import {StackActions, NavigationActions} from 'react-navigation';
@@ -40,7 +39,7 @@ const Page = (props) => {
       await AsyncStorage.setItem('token', json.token);
 
       props.setToken(json.token);
-      props.setName(username);
+      props.setUsername(username);
       props.setPass(password);
       props.navigation.dispatch(
         StackActions.reset({
@@ -69,7 +68,7 @@ const Page = (props) => {
         <Input
           placeholder="Digite seu nome de usuário"
           value={username}
-          onChangeText={(e) => setUsername(e)}
+          onChangeText={(e) => setUsername(e.trim())}
         />
 
         <Label>Senha</Label>
@@ -77,7 +76,7 @@ const Page = (props) => {
           placeholder="Digite sua senha"
           secureTextEntry={true}
           value={password}
-          onChangeText={(e) => setPassword(e)}
+          onChangeText={(e) => setPassword(e.trim())}
         />
         <ForgotPasswordButton>
           <ForgotPasswordText>Esqueceu sua senha?</ForgotPasswordText>
@@ -105,7 +104,7 @@ const Page = (props) => {
 const mapStateToProps = (state) => {
   return {
     token: state.userReducer.token,
-    name: state.userReducer.name,
+    username: state.userReducer.username,
     password: state.userReducer.password,
   };
 };
@@ -113,7 +112,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setToken: (token) => dispatch({type: 'SET_TOKEN', payload: {token}}),
-    setName: (name) => dispatch({type: 'SET_NAME', payload: {name}}),
+    setUsername: (username) =>
+      dispatch({type: 'SET_USERNAME', payload: {username}}),
     setPass: (password) => dispatch({type: 'SET_PASS', payload: {password}}),
   };
 };
