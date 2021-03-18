@@ -41,6 +41,10 @@ const Page = (props) => {
       props.setToken(json.token);
       props.setUsername(username);
       props.setPass(password);
+
+      // adicionar api getDataUser
+      //props.setAlgumaCoisa(json.algumaCoisa);
+
       props.navigation.dispatch(
         StackActions.reset({
           index: 0,
