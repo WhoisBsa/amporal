@@ -37,13 +37,21 @@ const Page = (props) => {
 
     if (json.token) {
       await AsyncStorage.setItem('token', json.token);
+      let userData = await Api.getUserData(json.token);
 
       props.setToken(json.token);
       props.setUsername(username);
       props.setPass(password);
+      props.setEmail(userData.email);
+      props.setFirstName(userData.first_name);
+      props.setLastName(userData.last_name);
+      props.setBio(userData.bio);
+      props.setInstituicao(userData.instituicao);
+      props.setDatanasc(userData.data_nascimento);
 
-      // adicionar api getDataUser
-      //props.setAlgumaCoisa(json.algumaCoisa);
+      console.log('====================================');
+      console.log(userData);
+      console.log('====================================');
 
       props.navigation.dispatch(
         StackActions.reset({
@@ -110,6 +118,12 @@ const mapStateToProps = (state) => {
     token: state.userReducer.token,
     username: state.userReducer.username,
     password: state.userReducer.password,
+    first_name: state.userReducer.first_name,
+    last_name: state.userReducer.last_name,
+    email: state.userReducer.email,
+    bio: state.userReducer.bio,
+    instituicao: state.userReducer.instituicao,
+    data_nascimento: state.userReducer.data_nascimento,
   };
 };
 
@@ -119,6 +133,16 @@ const mapDispatchToProps = (dispatch) => {
     setUsername: (username) =>
       dispatch({type: 'SET_USERNAME', payload: {username}}),
     setPass: (password) => dispatch({type: 'SET_PASS', payload: {password}}),
+    setFirstName: (first_name) =>
+      dispatch({type: 'SET_FIRST_NAME', payload: {first_name}}),
+    setLastName: (last_name) =>
+      dispatch({type: 'SET_LAST_NAME', payload: {last_name}}),
+    setEmail: (email) => dispatch({type: 'SET_EMAIL', payload: {email}}),
+    setBio: (bio) => dispatch({type: 'SET_BIO', payload: {bio}}),
+    setInstituicao: (instituicao) =>
+      dispatch({type: 'SET_INSTITUICAO', payload: {instituicao}}),
+    setDatanasc: (data_nascimento) =>
+      dispatch({type: 'SET_DATANASC', payload: {data_nascimento}}),
   };
 };
 
