@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {Box, Container, DataView, Input, Label} from './styled';
+import Icon from 'react-native-vector-icons/Ionicons';
+import styled from 'styled-components/native';
+import {Alert} from 'react-native';
+
+import {LIGHT} from '../../styles/colors';
 
 const Page = (props) => {
   console.log('====================================');
@@ -68,6 +73,48 @@ const Page = (props) => {
 };
 
 Page.navigationOptions = ({navigation}) => {
+  const ConfigButtonArea = styled.TouchableHighlight`
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+  `;
+
+  const ConfigButton = () => {
+    const btnAction = () => {
+      Alert.alert(
+        'Sair do AMPORAL',
+        'Deseja mesmo sair?',
+        [
+          {
+            text: 'Sair',
+            onPress: () => {
+              console.log('====================================');
+              console.log(navigation.state);
+              console.log('====================================');
+              // props.signOut();
+              // navigation.navigate('Login');
+            },
+          },
+          {
+            text: 'Cancelar',
+            onPress: () => {},
+          },
+        ],
+        {
+          cancelable: true,
+          onDismiss: () => {},
+        },
+      );
+    };
+
+    return (
+      <ConfigButtonArea onPress={btnAction} underlayColor="transparent">
+        <Icon name="exit" size={25} color={LIGHT} />
+      </ConfigButtonArea>
+    );
+  };
+
   return {
     title: 'AMPORAL',
     headerShown: true,
@@ -86,6 +133,7 @@ Page.navigationOptions = ({navigation}) => {
     cardStyle: {
       backgroundColor: '#FFFFFF',
     },
+    headerRight: () => <ConfigButton />,
   };
 };
 
@@ -111,6 +159,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({type: 'SET_LAST_NAME', payload: {last_name}}),
     setEmail: (email) => dispatch({type: 'SET_EMAIL', payload: {email}}),
     setBio: (bio) => dispatch({type: 'SET_BIO', payload: {bio}}),
+    setInstituicao: (instituicao) =>
+      dispatch({type: 'SET_INSTITUICAO', payload: {instituicao}}),
     setDatanasc: (data_nascimento) =>
       dispatch({type: 'SET_DATANASC', payload: {data_nascimento}}),
     signOut: () => dispatch({type: 'SIGNOUT_REQUEST'}),
