@@ -33,4 +33,16 @@ export default {
     const json = await req.json();
     return json;
   },
+  getUserData: async (token, username) => {
+    const req = await fetch(`${BASE_URL}/user/get/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `token ${token}`,
+      },
+    });
+    const json = await req.json();
+    return json;
+  },
 };
