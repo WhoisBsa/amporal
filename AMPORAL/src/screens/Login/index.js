@@ -49,9 +49,7 @@ const Page = (props) => {
       props.setInstituicao(userData.instituicao);
       props.setDatanasc(userData.data_nascimento);
 
-      console.log('====================================');
-      console.log(userData);
-      console.log('====================================');
+      // Adicionar aulas
 
       props.navigation.dispatch(
         StackActions.reset({
