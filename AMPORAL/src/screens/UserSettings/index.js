@@ -1,17 +1,21 @@
 import React, {useState} from 'react';
+import {StackActions, NavigationActions} from 'react-navigation';
 import {connect} from 'react-redux';
-import {Box, Container, DataView, Input, Label} from './styled';
+import {
+  Box,
+  Container,
+  DataView,
+  DataUserView,
+  Input,
+  Label,
+  ConfigButtonArea,
+} from './styled';
 import Icon from 'react-native-vector-icons/Ionicons';
-import styled from 'styled-components/native';
 import {Alert} from 'react-native';
 
 import {LIGHT} from '../../styles/colors';
 
 const Page = (props) => {
-  console.log('====================================');
-  console.log(props);
-  console.log('====================================');
-
   const [username, setUsername] = useState(props.username);
   const [first_name, setFirstName] = useState(props.first_name);
   const [last_name, setLastName] = useState(props.last_name);
@@ -20,101 +24,93 @@ const Page = (props) => {
   const [instituicao, setInstituicao] = useState(props.instituicao);
   const [data_nascimento, setDatanasc] = useState(props.data_nascimento);
 
+  const handleExitButton = () => {
+    Alert.alert(
+      'Sair do AMPORAL',
+      'Deseja mesmo sair?',
+      [
+        {
+          text: 'Sair',
+          onPress: () => {
+            props.signOut();
+            props.navigation.dispatch(
+              StackActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({routeName: 'Login'})],
+              }),
+            );
+          },
+        },
+        {
+          text: 'Cancelar',
+          onPress: () => {},
+        },
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => {},
+      },
+    );
+  };
+
   return (
     <Container>
+      <ConfigButtonArea onPress={handleExitButton} underlayColor="transparent">
+        <Icon name="exit" size={25} color={LIGHT} />
+      </ConfigButtonArea>
       <Box />
 
       <DataView
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled">
-        <Label>Nome do Aluno</Label>
-        <Input
-          placeholder="Digite seu nome completo"
-          value={first_name + ' ' + last_name ? first_name && last_name : ''}
-          onChangeText={(t) => {
-            t = t.strip(' ');
-            setFirstName(t[0].trim());
-            setLastName(t[1].trim());
-          }}
-        />
-        <Label>Nome de Usuário</Label>
-        <Input
-          placeholder="Digite seu nome de usuário"
-          value={username}
-          onChangeText={(t) => setUsername(t.trim())}
-        />
-        <Label>Email</Label>
-        <Input
-          placeholder="Digite seu endereço de email"
-          value={email}
-          onChangeText={(t) => setEmail(t.trim())}
-        />
-        <Label>Bio</Label>
-        <Input
-          placeholder="Digite sua leve biografia"
-          value={bio}
-          onChangeText={(t) => setBio(t.trim())}
-        />
-        <Label>Instituição</Label>
-        <Input
-          placeholder="Digite o nome de sua instituição"
-          value={instituicao}
-          onChangeText={(t) => setInstituicao(t.trim())}
-        />
-        <Label>Data de Nascimento</Label>
-        <Input
-          placeholder="Digite sua data de nascimento: xx/xx/xxxx"
-          value={data_nascimento}
-          onChangeText={(t) => setDatanasc(t.trim())}
-        />
+        <DataUserView>
+          <Label>Nome do Aluno</Label>
+          <Input
+            placeholder="Digite seu nome completo"
+            value={first_name + ' ' + last_name ? first_name && last_name : ''}
+            onChangeText={(t) => {
+              t = t.strip(' ');
+              setFirstName(t[0].trim());
+              setLastName(t[1].trim());
+            }}
+          />
+          <Label>Nome de Usuário</Label>
+          <Input
+            placeholder="Digite seu nome de usuário"
+            value={username}
+            onChangeText={(t) => setUsername(t.trim())}
+          />
+          <Label>Email</Label>
+          <Input
+            placeholder="Digite seu endereço de email"
+            value={email}
+            onChangeText={(t) => setEmail(t.trim())}
+          />
+          <Label>Bio</Label>
+          <Input
+            placeholder="Digite sua leve biografia"
+            value={bio}
+            onChangeText={(t) => setBio(t.trim())}
+          />
+          <Label>Instituição</Label>
+          <Input
+            placeholder="Digite o nome de sua instituição"
+            value={instituicao}
+            onChangeText={(t) => setInstituicao(t.trim())}
+          />
+          <Label>Data de Nascimento</Label>
+          <Input
+            placeholder="Digite sua data de nascimento: xx/xx/xxxx"
+            value={data_nascimento}
+            onChangeText={(t) => setDatanasc(t.trim())}
+          />
+        </DataUserView>
       </DataView>
     </Container>
   );
 };
 
 Page.navigationOptions = ({navigation}) => {
-  const ConfigButtonArea = styled.TouchableHighlight`
-    width: 30px;
-    height: 30px;
-    justify-content: center;
-    align-items: center;
-  `;
-
-  const ConfigButton = () => {
-    const btnAction = () => {
-      Alert.alert(
-        'Sair do AMPORAL',
-        'Deseja mesmo sair?',
-        [
-          {
-            text: 'Sair',
-            onPress: () => {
-              console.log('====================================');
-              console.log(navigation.state);
-              console.log('====================================');
-              // props.signOut();
-              // navigation.navigate('Login');
-            },
-          },
-          {
-            text: 'Cancelar',
-            onPress: () => {},
-          },
-        ],
-        {
-          cancelable: true,
-          onDismiss: () => {},
-        },
-      );
-    };
-
-    return (
-      <ConfigButtonArea onPress={btnAction} underlayColor="transparent">
-        <Icon name="exit" size={25} color={LIGHT} />
-      </ConfigButtonArea>
-    );
-  };
-
   return {
     title: 'AMPORAL',
     headerShown: true,
@@ -133,7 +129,6 @@ Page.navigationOptions = ({navigation}) => {
     cardStyle: {
       backgroundColor: '#FFFFFF',
     },
-    headerRight: () => <ConfigButton />,
   };
 };
 

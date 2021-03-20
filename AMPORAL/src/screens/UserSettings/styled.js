@@ -20,15 +20,17 @@ export const DataView = styled.ScrollView`
   border-top-left-radius: 40px;
   background-color: ${PRIMARY};
   flex: 1;
-  padding: 20px;
-  padding-top: -10px;
+`;
+
+export const DataUserView = styled.View`
+  padding: 0px 20px 10px;
 `;
 
 export const Label = styled.Text`
   font-size: ${(props) => props.size || '16'}px;
   color: ${LIGHT};
   font-weight: bold;
-  margin: 20px 0px 10px 0px;
+  margin: 15px 0px 10px 0px;
 `;
 
 export const Input = styled.TextInput`
@@ -40,4 +42,15 @@ export const Input = styled.TextInput`
   color: ${DARK};
   font-weight: bold;
   padding-left: 10px;
+`;
+
+export const ConfigButtonArea = styled.TouchableHighlight`
+  width: 30px;
+  height: 30px;
+  justify-content: flex-end;
+  align-self: flex-end;
+  position: absolute;
+  top: -43px;
+  right: 7%;
+  z-index: 1;
 `;
