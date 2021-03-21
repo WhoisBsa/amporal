@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {DARK, LIGHT, PRIMARY} from '../../styles/colors';
+import {DARK, LIGHT, PRIMARY, SECONDARY} from '../../styles/colors';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -53,4 +53,20 @@ export const ConfigButtonArea = styled.TouchableHighlight`
   top: -43px;
   right: 7%;
   z-index: 1;
+`;
+
+export const SaveButton = styled.TouchableHighlight`
+  background-color: ${SECONDARY};
+  border-radius: 10px;
+  height: 45px;
+  width: 100%;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SaveButtonText = styled.Text`
+  font-size: 16px;
+  color: ${DARK};
+  font-weight: bold;
 `;

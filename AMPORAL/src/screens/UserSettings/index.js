@@ -9,6 +9,8 @@ import {
   Input,
   Label,
   ConfigButtonArea,
+  SaveButton,
+  SaveButtonText,
 } from './styled';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Alert} from 'react-native';
@@ -53,6 +55,35 @@ const Page = (props) => {
     );
   };
 
+  const handleSaveButton = () => {
+    Alert.alert(
+      'Salvar Dados Alterados',
+      'Deseja mesmo salvar as alterações?',
+      [
+        {
+          text: 'Salvar',
+          onPress: () => {
+            props.setUsername(username?.trim());
+            props.setFirstName(first_name?.trim());
+            props.setLastName(last_name?.trim());
+            props.setEmail(email?.trim());
+            props.setBio(bio?.trim());
+            props.setInstituicao(instituicao?.trim());
+            props.setDatanasc(data_nascimento?.trim());
+          },
+        },
+        {
+          text: 'Cancelar',
+          onPress: () => {},
+        },
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => {},
+      },
+    );
+  };
+
   return (
     <Container>
       <ConfigButtonArea onPress={handleExitButton} underlayColor="transparent">
@@ -70,40 +101,45 @@ const Page = (props) => {
             value={first_name + ' ' + last_name ? first_name && last_name : ''}
             onChangeText={(t) => {
               t = t.strip(' ');
-              setFirstName(t[0].trim());
-              setLastName(t[1].trim());
+              setFirstName(t[0]);
+              setLastName(t[1]);
             }}
           />
           <Label>Nome de Usuário</Label>
           <Input
             placeholder="Digite seu nome de usuário"
             value={username}
-            onChangeText={(t) => setUsername(t.trim())}
+            editable={false}
           />
           <Label>Email</Label>
           <Input
             placeholder="Digite seu endereço de email"
             value={email}
-            onChangeText={(t) => setEmail(t.trim())}
+            editable={false}
           />
           <Label>Bio</Label>
           <Input
             placeholder="Digite sua leve biografia"
             value={bio}
-            onChangeText={(t) => setBio(t.trim())}
+            onChangeText={(t) => setBio(t)}
           />
           <Label>Instituição</Label>
           <Input
             placeholder="Digite o nome de sua instituição"
             value={instituicao}
-            onChangeText={(t) => setInstituicao(t.trim())}
+            onChangeText={(t) => setInstituicao(t)}
           />
           <Label>Data de Nascimento</Label>
           <Input
             placeholder="Digite sua data de nascimento: xx/xx/xxxx"
             value={data_nascimento}
-            onChangeText={(t) => setDatanasc(t.trim())}
+            onChangeText={(t) => setDatanasc(t)}
           />
+
+          <Label>Salvar Alterações:</Label>
+          <SaveButton onPress={handleSaveButton} underlayColor="#34F674">
+            <SaveButtonText>SALVAR</SaveButtonText>
+          </SaveButton>
         </DataUserView>
       </DataView>
     </Container>
