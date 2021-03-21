@@ -1,23 +1,62 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
+import {Box, Container, DataView, DataUserView, Input, Label} from './styled';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {connect} from 'react-redux';
 
 import {LIGHT} from '../../styles/colors';
-import {Box, Container, DataView} from './styled';
 
 const Page = (props) => {
   return (
     <Container>
       <Box />
 
-      <DataView />
+      <DataView
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled">
+        <DataUserView>
+          {props.first_name ? (
+            <>
+              <Label>Nome do Aluno</Label>
+              <Input>{props.first_name + ' ' + props.last_name}</Input>
+            </>
+          ) : null}
+
+          {props.username ? (
+            <>
+              <Label>Nome de Usuário</Label>
+              <Input>{props.username}</Input>
+            </>
+          ) : null}
+
+          {props.email ? (
+            <>
+              <Label>Email</Label>
+              <Input>{props.email}</Input>
+            </>
+          ) : null}
+
+          {props.bio ? (
+            <>
+              <Label>Biografia do Aluno</Label>
+              <Input>{props.bio}</Input>
+            </>
+          ) : null}
+
+          {props.instituicao ? (
+            <>
+              <Label>Nome da Instituição</Label>
+              <Input>{props.instituicao}</Input>
+            </>
+          ) : null}
+        </DataUserView>
+      </DataView>
     </Container>
   );
 };
 
 Page.navigationOptions = ({navigation}) => {
-  const ConfigButtonArea = styled.TouchableHighlight`
+  const ConfigBtnArea = styled.TouchableHighlight`
     width: 30px;
     height: 30px;
     justify-content: center;
@@ -30,9 +69,9 @@ Page.navigationOptions = ({navigation}) => {
     };
 
     return (
-      <ConfigButtonArea onPress={btnAction} underlayColor="transparent">
+      <ConfigBtnArea onPress={btnAction} underlayColor="transparent">
         <Icon name="settings-sharp" size={25} color={LIGHT} />
-      </ConfigButtonArea>
+      </ConfigBtnArea>
     );
   };
 
@@ -56,16 +95,17 @@ Page.navigationOptions = ({navigation}) => {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.userReducer.token,
-    name: state.userReducer.name,
-    password: state.userReducer.password,
+    username: state.userReducer.username,
+    first_name: state.userReducer.first_name,
+    last_name: state.userReducer.last_name,
+    email: state.userReducer.email,
+    bio: state.userReducer.bio,
+    instituicao: state.userReducer.instituicao,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    setToken: (token) => dispatch({type: 'SET_TOKEN', payload: {token}}),
-  };
+  return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);
