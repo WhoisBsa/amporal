@@ -33,7 +33,7 @@ export default {
     const json = await req.json();
     return json;
   },
-  getUserData: async (token, username) => {
+  getUserData: async (token) => {
     const req = await fetch(`${BASE_URL}/user/get/`, {
       method: 'GET',
       headers: {
@@ -41,6 +41,26 @@ export default {
         'Content-Type': 'application/json',
         Authorization: `token ${token}`,
       },
+    });
+    const json = await req.json();
+    return json;
+  },
+  updateUserData: async ({props}) => {
+    const req = await fetch(`${BASE_URL}/user/put/`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `token ${props.token}`,
+      },
+      body: JSON.stringify({
+        username: props.username,
+        first_name: props.first_name,
+        last_name: props.last_name,
+        bio: props.bio,
+        instituicao: props.instituicao,
+        data_nascimento: props.data_nascimento,
+      }),
     });
     const json = await req.json();
     return json;
