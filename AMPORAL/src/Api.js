@@ -45,21 +45,29 @@ export default {
     const json = await req.json();
     return json;
   },
-  updateUserData: async ({props}) => {
+  updateUserData: async (
+    token,
+    username,
+    first_name,
+    last_name,
+    bio,
+    instituicao,
+    data_nascimento,
+  ) => {
     const req = await fetch(`${BASE_URL}/user/put/`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `token ${props.token}`,
+        Authorization: `token ${token}`,
       },
       body: JSON.stringify({
-        username: props.username,
-        first_name: props.first_name,
-        last_name: props.last_name,
-        bio: props.bio,
-        instituicao: props.instituicao,
-        data_nascimento: props.data_nascimento,
+        username,
+        first_name,
+        last_name,
+        bio,
+        instituicao,
+        data_nascimento,
       }),
     });
     const json = await req.json();
