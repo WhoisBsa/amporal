@@ -14,8 +14,10 @@ import {
 } from './styled';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Alert} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {LIGHT} from '../../styles/colors';
+import Api from '../../Api';
 
 const Page = (props) => {
   const [username, setUsername] = useState(props.username);
@@ -55,6 +57,16 @@ const Page = (props) => {
     );
   };
 
+  const saveData = () => {
+    props.setUsername(username?.trim());
+    props.setFirstName(first_name?.trim());
+    props.setLastName(last_name?.trim());
+    props.setEmail(email?.trim());
+    props.setBio(bio?.trim());
+    props.setInstituicao(instituicao?.trim());
+    props.setDatanasc(data_nascimento?.trim());
+  };
+
   const handleSaveButton = () => {
     Alert.alert(
       'Salvar Dados Alterados',
@@ -62,14 +74,35 @@ const Page = (props) => {
       [
         {
           text: 'Salvar',
-          onPress: () => {
-            props.setUsername(username?.trim());
-            props.setFirstName(first_name?.trim());
-            props.setLastName(last_name?.trim());
-            props.setEmail(email?.trim());
-            props.setBio(bio?.trim());
-            props.setInstituicao(instituicao?.trim());
-            props.setDatanasc(data_nascimento?.trim());
+          onPress: async () => {
+            saveData();
+            console.log('====================================');
+            console.log(props.bio);
+            console.log('====================================');
+
+            let json = await Api.updateUserData(
+              props.token,
+              username,
+              first_name,
+              last_name,
+              bio,
+              instituicao,
+              data_nascimento,
+            );
+            const items = [
+              ['username', json.username],
+              ['email', json.email],
+              ['first_name', json.first_name],
+              ['last_name', json.last_name],
+              ['bio', json.bio],
+              ['instituicao', json.instituicao],
+              ['data_nascimento', json.data_nascimento],
+            ];
+            await AsyncStorage.multiSet(items);
+
+            console.log('====================================');
+            console.log(json);
+            console.log('====================================');
           },
         },
         {
@@ -95,28 +128,22 @@ const Page = (props) => {
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled">
         <DataUserView>
-          <Label>Nome do Aluno</Label>
+          <Label>Nome</Label>
           <Input
-            placeholder="Digite seu nome completo"
-            value={first_name + ' ' + last_name ? first_name && last_name : ''}
-            onChangeText={(t) => {
-              t = t.strip(' ');
-              setFirstName(t[0]);
-              setLastName(t[1]);
-            }}
+            placeholder="Digite seu nome"
+            value={first_name}
+            onChangeText={(t) => setFirstName(t)}
           />
-          <Label>Nome de Usuário</Label>
+          <Label>Sobrenome</Label>
           <Input
-            placeholder="Digite seu nome de usuário"
-            value={username}
-            editable={false}
+            placeholder="Digite seu sobrenome"
+            value={last_name}
+            onChangeText={(t) => setLastName(t)}
           />
+          <Label>Nome de usuário</Label>
+          <Input value={username} editable={false} />
           <Label>Email</Label>
-          <Input
-            placeholder="Digite seu endereço de email"
-            value={email}
-            editable={false}
-          />
+          <Input value={email} editable={false} />
           <Label>Bio</Label>
           <Input
             placeholder="Digite sua leve biografia"
@@ -170,6 +197,7 @@ Page.navigationOptions = ({navigation}) => {
 
 const mapStateToProps = (state) => {
   return {
+    token: state.userReducer.token,
     username: state.userReducer.username,
     first_name: state.userReducer.first_name,
     last_name: state.userReducer.last_name,
@@ -185,9 +213,9 @@ const mapDispatchToProps = (dispatch) => {
     setUsername: (username) =>
       dispatch({type: 'SET_USERNAME', payload: {username}}),
     setFirstName: (first_name) =>
-      dispatch({type: 'SET_FIRST_NAME', payload: {first_name}}),
+      dispatch({type: 'SET_FNAME', payload: {first_name}}),
     setLastName: (last_name) =>
-      dispatch({type: 'SET_LAST_NAME', payload: {last_name}}),
+      dispatch({type: 'SET_LNAME', payload: {last_name}}),
     setEmail: (email) => dispatch({type: 'SET_EMAIL', payload: {email}}),
     setBio: (bio) => dispatch({type: 'SET_BIO', payload: {bio}}),
     setInstituicao: (instituicao) =>
