@@ -132,9 +132,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({type: 'SET_USERNAME', payload: {username}}),
     setPass: (password) => dispatch({type: 'SET_PASS', payload: {password}}),
     setFirstName: (first_name) =>
-      dispatch({type: 'SET_FIRST_NAME', payload: {first_name}}),
+      dispatch({type: 'SET_FNAME', payload: {first_name}}),
     setLastName: (last_name) =>
-      dispatch({type: 'SET_LAST_NAME', payload: {last_name}}),
+      dispatch({type: 'SET_LNAME', payload: {last_name}}),
     setEmail: (email) => dispatch({type: 'SET_EMAIL', payload: {email}}),
     setBio: (bio) => dispatch({type: 'SET_BIO', payload: {bio}}),
     setInstituicao: (instituicao) =>
