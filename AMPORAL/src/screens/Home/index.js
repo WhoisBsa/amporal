@@ -21,7 +21,7 @@ const Page = (props) => {
       </StartButton>
 
       <Header>
-        Começe a aprender com as melhores videoaulas disponíveis!!!
+        Comece a aprender com as melhores videoaulas disponíveis!!!
       </Header>
 
       <Lottie
