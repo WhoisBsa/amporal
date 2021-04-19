@@ -1,12 +1,12 @@
 import React from 'react';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import HomeStack from './HomeStack';
 import AulasStack from './AulasStack';
 import ProfileStack from './ProfileStack';
 
 import CustomTabBar from '../components/CustomTabBar';
-import {LIGHT} from '../styles/colors';
+import { LIGHT } from '../styles/colors';
 
 const AppTab = createBottomTabNavigator(
   {
@@ -40,7 +40,7 @@ const AppTab = createBottomTabNavigator(
   },
   {
     defaultNavigationOptions: {
-      cardStyle: {backgroundColor: LIGHT},
+      cardStyle: { backgroundColor: LIGHT },
     },
   },
 );

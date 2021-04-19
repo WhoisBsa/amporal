@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {LIGHT, PRIMARY} from '../styles/colors';
+import { LIGHT, PRIMARY } from '../styles/colors';
 
 const TabArea = styled.SafeAreaView`
   flex-direction: row;
@@ -50,7 +50,7 @@ export default (props) => {
                     name="home"
                     size={25}
                     color={LIGHT}
-                    style={{marginTop: 10, marginBottom: 5}}
+                    style={{ marginTop: 10, marginBottom: 5 }}
                   />
                 )}
                 {item.text === 'Perfil' && (
@@ -58,7 +58,7 @@ export default (props) => {
                     name="person"
                     size={25}
                     color={LIGHT}
-                    style={{marginTop: 10, marginBottom: 5}}
+                    style={{ marginTop: 10, marginBottom: 5 }}
                   />
                 )}
                 <Text>{item.text}</Text>
@@ -75,7 +75,7 @@ export default (props) => {
                   name="play"
                   size={40}
                   color={LIGHT}
-                  style={{alignSelf: 'center'}}
+                  style={{ alignSelf: 'center' }}
                 />
               </>
             </TabBall>

@@ -1,5 +1,5 @@
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import Preload from '../screens/Preload';
 import Login from '../screens/Login';
@@ -20,7 +20,7 @@ export default createAppContainer(
       initialRouteName: 'Preload',
       defaultNavigationOptions: {
         headerShown: false,
-        cardStyle: {backgroundColor: 'dodgerblue'},
+        cardStyle: { backgroundColor: 'dodgerblue' },
       },
     },
   ),

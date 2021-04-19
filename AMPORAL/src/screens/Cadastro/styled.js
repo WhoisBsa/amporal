@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {DARK, LIGHT, PRIMARY, SECONDARY} from '../../styles/colors';
+import { DARK, LIGHT, PRIMARY, SECONDARY } from '../../styles/colors';
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;

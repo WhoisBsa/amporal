@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   LoginArea,
@@ -12,15 +12,15 @@ import {
   SigninText,
 } from './styled';
 import Lottie from 'lottie-react-native';
-import {Platform, Alert} from 'react-native';
-import {connect} from 'react-redux';
+import { Platform, Alert } from 'react-native';
+import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-import {StackActions, NavigationActions} from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 import Api from '../../Api';
 
 import mathTeatcher from '../../assets/mathTeacher.json';
-import {LIGHT} from '../../styles/colors';
+import { LIGHT } from '../../styles/colors';
 
 const Page = (props) => {
   const [username, setUsername] = useState('');
@@ -60,7 +60,7 @@ const Page = (props) => {
         props.navigation.dispatch(
           StackActions.reset({
             index: 0,
-            actions: [NavigationActions.navigate({routeName: 'AppTab'})],
+            actions: [NavigationActions.navigate({ routeName: 'AppTab' })],
           }),
         );
       }
@@ -70,7 +70,7 @@ const Page = (props) => {
   return (
     <Container behavior={Platform.OS === 'ios' ? 'padding' : null}>
       <Lottie
-        style={{width: '60%', marginBottom: -30, marginTop: -30}}
+        style={{ width: '60%', marginBottom: -30, marginTop: -30 }}
         resizeMode="contain"
         source={mathTeatcher}
         autoPlay
@@ -120,7 +120,7 @@ const Page = (props) => {
   );
 };
 
-Page.navigationOptions = ({navigation}) => {
+Page.navigationOptions = ({ navigation }) => {
   return {
     title: 'Criar uma conta',
     headerShown: true,
@@ -142,11 +142,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setToken: (token) => dispatch({type: 'SET_TOKEN', payload: {token}}),
+    setToken: (token) => dispatch({ type: 'SET_TOKEN', payload: { token } }),
     setUsername: (username) =>
-      dispatch({type: 'SET_USERNAME', payload: {username}}),
-    setEmail: (email) => dispatch({type: 'SET_EMAIL', payload: {email}}),
-    setPass: (password) => dispatch({type: 'SET_PASS', payload: {password}}),
+      dispatch({ type: 'SET_USERNAME', payload: { username } }),
+    setEmail: (email) => dispatch({ type: 'SET_EMAIL', payload: { email } }),
+    setPass: (password) => dispatch({ type: 'SET_PASS', payload: { password } }),
   };
 };
 

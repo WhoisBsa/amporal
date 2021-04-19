@@ -1,11 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Lottie from 'lottie-react-native';
 
-import {Container, Header, StartButton, StartText} from './styled';
-import {LIGHT} from '../../styles/colors';
+import { Container, Header, StartButton, StartText } from './styled';
+import { LIGHT } from '../../styles/colors';
 
 const Page = (props) => {
   return (
@@ -15,7 +15,7 @@ const Page = (props) => {
   );
 };
 
-Page.navigationOptions = ({navigation}) => {
+Page.navigationOptions = ({ navigation }) => {
   const ConfigButtonArea = styled.TouchableHighlight`
     width: 30px;
     height: 30px;

@@ -1,5 +1,5 @@
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import Profile from '../screens/Profile';
 
@@ -12,7 +12,7 @@ export default createAppContainer(
       initialRouteName: 'Profile',
       defaultNavigationOptions: {
         headerShown: true,
-        cardStyle: {backgroundColor: '#FFF'},
+        cardStyle: { backgroundColor: '#FFF' },
       },
     },
   ),

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {LIGHT, PRIMARY} from '../../styles/colors';
+import { LIGHT, PRIMARY } from '../../styles/colors';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
