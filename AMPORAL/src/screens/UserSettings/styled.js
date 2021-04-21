@@ -6,11 +6,17 @@ export const Container = styled.SafeAreaView`
   align-items: center;
 `;
 
-export const Box = styled.View`
+export const Box = styled.TouchableHighlight`
   width: 200px;
   height: 200px;
   background-color: ${DARK};
   margin: 40px 0;
+  border-radius: 20px;
+`;
+
+export const ImageProfile = styled.Image`
+  width: 200px;
+  height: 200px;
   border-radius: 20px;
 `;
 

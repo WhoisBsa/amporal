@@ -11,10 +11,12 @@ import {
   ConfigButtonArea,
   SaveButton,
   SaveButtonText,
+  ImageProfile,
 } from './styled';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 import { LIGHT } from '../../styles/colors';
 import Api from '../../Api';
@@ -27,7 +29,10 @@ const Page = (props) => {
   const [bio, setBio] = useState(props.bio);
   const [instituicao, setInstituicao] = useState(props.instituicao);
   const [data_nascimento, setDatanasc] = useState(props.data_nascimento);
+  const [filePath, setFilePath] = useState({});
 
+  console.log('Foto filepath: ' + filePath.uri);
+  console.log('Foto props: ' + props.foto_url);
   const handleExitButton = () => {
     Alert.alert(
       'Sair do AMPORAL',
@@ -76,9 +81,6 @@ const Page = (props) => {
           text: 'Salvar',
           onPress: async () => {
             saveData();
-            console.log('====================================');
-            console.log(props.bio);
-            console.log('====================================');
 
             let json = await Api.updateUserData(
               props.token,
@@ -99,10 +101,6 @@ const Page = (props) => {
               ['data_nascimento', json.data_nascimento],
             ];
             await AsyncStorage.multiSet(items);
-
-            console.log('====================================');
-            console.log(json);
-            console.log('====================================');
           },
         },
         {
@@ -117,12 +115,78 @@ const Page = (props) => {
     );
   };
 
+  const handleChangeProfilePic = () => {
+    console.log('Url foto 1: ' + props.foto_url);
+    Alert.alert(
+      'Alterar Foto de perfil',
+      'Deseja alterar sua foto de perfil?',
+      [
+        {
+          text: 'Alterar',
+          onPress: () => {
+            let options = {
+              title: 'Select Image',
+              customButtons: [
+                {
+                  name: 'customOptionKey',
+                  title: 'Choose Photo from Custom Option'
+                },
+              ],
+              storageOptions: {
+                skipBackup: true,
+                path: 'images',
+              },
+            };
+            launchImageLibrary(options, (response) => {
+              console.log('Response = ', response);
+
+              if (response.didCancel) {
+                console.log('User cancelled image picker');
+              } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+              } else if (response.customButton) {
+                console.log(
+                  'User tapped custom button: ',
+                  response.customButton
+                );
+                alert(response.customButton);
+              } else {
+                let source = response;
+                setFilePath(source);
+
+              }
+            });
+          },
+        },
+        {
+          text: 'Cancelar',
+          onPress: () => { },
+        },
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => { },
+      },
+    );
+
+    props.setFoto(filePath.uri);
+
+    console.log('Url da foto: ' + props.foto_url);
+  };
+
   return (
     <Container>
       <ConfigButtonArea onPress={handleExitButton} underlayColor="transparent">
         <Icon name="exit" size={25} color={LIGHT} />
       </ConfigButtonArea>
-      <Box />
+      <Box onPress={handleChangeProfilePic}>
+        {!filePath.uri && (
+          <ImageProfile source={{ uri: props.foto_url }} />
+        ) || (
+            <ImageProfile source={{ uri: filePath.uri }} />
+          )}
+
+      </Box>
 
       <DataView
         showsVerticalScrollIndicator={false}
@@ -205,6 +269,7 @@ const mapStateToProps = (state) => {
     bio: state.userReducer.bio,
     instituicao: state.userReducer.instituicao,
     data_nascimento: state.userReducer.data_nascimento,
+    foto_url: state.userReducer.foto_url,
   };
 };
 
@@ -222,6 +287,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: 'SET_INSTITUICAO', payload: { instituicao } }),
     setDatanasc: (data_nascimento) =>
       dispatch({ type: 'SET_DATANASC', payload: { data_nascimento } }),
+    setFoto: (foto_url) => dispatch({ type: 'SET_FOTO', payload: { foto_url } }),
     signOut: () => dispatch({ type: 'SIGNOUT_REQUEST' }),
   };
 };
