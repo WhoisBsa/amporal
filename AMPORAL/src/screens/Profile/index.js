@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Box, Container, DataView, DataUserView, Input, Label } from './styled';
+import { Box, Container, DataView, DataUserView, Input, Label, ImageProfile } from './styled';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -9,7 +9,9 @@ import { LIGHT } from '../../styles/colors';
 const Page = (props) => {
   return (
     <Container>
-      <Box />
+      <Box>
+        <ImageProfile source={{ uri: props.foto_url }} />
+      </Box>
 
       <DataView
         showsVerticalScrollIndicator={false}
@@ -101,6 +103,7 @@ const mapStateToProps = (state) => {
     email: state.userReducer.email,
     bio: state.userReducer.bio,
     instituicao: state.userReducer.instituicao,
+    foto_url: state.userReducer.foto_url,
   };
 };
 

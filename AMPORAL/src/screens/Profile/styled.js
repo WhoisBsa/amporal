@@ -14,6 +14,12 @@ export const Box = styled.View`
   border-radius: 20px;
 `;
 
+export const ImageProfile = styled.Image`
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+`;
+
 export const DataView = styled.ScrollView`
   width: 100%;
   border-top-right-radius: 40px;
