@@ -1,10 +1,10 @@
 import React from 'react';
-import {StackActions, NavigationActions} from 'react-navigation';
-import {connect} from 'react-redux';
+import { StackActions, NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 import Lottie from 'lottie-react-native';
 
 import mathTeatcher from '../../assets/mathTeacher.json';
-import {Container, LoadingIcon} from './styled';
+import { Container, LoadingIcon } from './styled';
 
 const Preload = (props) => {
   if (!props.token) {
@@ -12,7 +12,7 @@ const Preload = (props) => {
     props.navigation.dispatch(
       StackActions.reset({
         index: 0,
-        actions: [NavigationActions.navigate({routeName: 'Login'})],
+        actions: [NavigationActions.navigate({ routeName: 'Login' })],
       }),
     );
   } else {
@@ -20,14 +20,14 @@ const Preload = (props) => {
     props.navigation.dispatch(
       StackActions.reset({
         index: 0,
-        actions: [NavigationActions.navigate({routeName: 'AppTab'})],
+        actions: [NavigationActions.navigate({ routeName: 'AppTab' })],
       }),
     );
   }
   return (
     <Container>
       <Lottie
-        style={{width: '80%'}}
+        style={{ width: '80%' }}
         resizeMode="contain"
         source={mathTeatcher}
         autoPlay

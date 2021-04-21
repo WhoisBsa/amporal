@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {StackActions, NavigationActions} from 'react-navigation';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { StackActions, NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 import {
   Box,
   Container,
@@ -13,10 +13,10 @@ import {
   SaveButtonText,
 } from './styled';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Alert} from 'react-native';
+import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {LIGHT} from '../../styles/colors';
+import { LIGHT } from '../../styles/colors';
 import Api from '../../Api';
 
 const Page = (props) => {
@@ -40,19 +40,19 @@ const Page = (props) => {
             props.navigation.dispatch(
               StackActions.reset({
                 index: 0,
-                actions: [NavigationActions.navigate({routeName: 'Login'})],
+                actions: [NavigationActions.navigate({ routeName: 'Login' })],
               }),
             );
           },
         },
         {
           text: 'Cancelar',
-          onPress: () => {},
+          onPress: () => { },
         },
       ],
       {
         cancelable: true,
-        onDismiss: () => {},
+        onDismiss: () => { },
       },
     );
   };
@@ -107,12 +107,12 @@ const Page = (props) => {
         },
         {
           text: 'Cancelar',
-          onPress: () => {},
+          onPress: () => { },
         },
       ],
       {
         cancelable: true,
-        onDismiss: () => {},
+        onDismiss: () => { },
       },
     );
   };
@@ -173,7 +173,7 @@ const Page = (props) => {
   );
 };
 
-Page.navigationOptions = ({navigation}) => {
+Page.navigationOptions = ({ navigation }) => {
   return {
     title: 'AMPORAL',
     headerShown: true,
@@ -211,18 +211,18 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setUsername: (username) =>
-      dispatch({type: 'SET_USERNAME', payload: {username}}),
+      dispatch({ type: 'SET_USERNAME', payload: { username } }),
     setFirstName: (first_name) =>
-      dispatch({type: 'SET_FNAME', payload: {first_name}}),
+      dispatch({ type: 'SET_FNAME', payload: { first_name } }),
     setLastName: (last_name) =>
-      dispatch({type: 'SET_LNAME', payload: {last_name}}),
-    setEmail: (email) => dispatch({type: 'SET_EMAIL', payload: {email}}),
-    setBio: (bio) => dispatch({type: 'SET_BIO', payload: {bio}}),
+      dispatch({ type: 'SET_LNAME', payload: { last_name } }),
+    setEmail: (email) => dispatch({ type: 'SET_EMAIL', payload: { email } }),
+    setBio: (bio) => dispatch({ type: 'SET_BIO', payload: { bio } }),
     setInstituicao: (instituicao) =>
-      dispatch({type: 'SET_INSTITUICAO', payload: {instituicao}}),
+      dispatch({ type: 'SET_INSTITUICAO', payload: { instituicao } }),
     setDatanasc: (data_nascimento) =>
-      dispatch({type: 'SET_DATANASC', payload: {data_nascimento}}),
-    signOut: () => dispatch({type: 'SIGNOUT_REQUEST'}),
+      dispatch({ type: 'SET_DATANASC', payload: { data_nascimento } }),
+    signOut: () => dispatch({ type: 'SIGNOUT_REQUEST' }),
   };
 };
 

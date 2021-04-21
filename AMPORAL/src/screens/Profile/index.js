@@ -1,10 +1,10 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Box, Container, DataView, DataUserView, Input, Label} from './styled';
+import { connect } from 'react-redux';
+import { Box, Container, DataView, DataUserView, Input, Label } from './styled';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {LIGHT} from '../../styles/colors';
+import { LIGHT } from '../../styles/colors';
 
 const Page = (props) => {
   return (
@@ -55,7 +55,7 @@ const Page = (props) => {
   );
 };
 
-Page.navigationOptions = ({navigation}) => {
+Page.navigationOptions = ({ navigation }) => {
   const ConfigBtnArea = styled.TouchableHighlight`
     width: 30px;
     height: 30px;
