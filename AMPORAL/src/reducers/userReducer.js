@@ -8,6 +8,7 @@ const initialState = {
   bio: '',
   instituicao: '',
   data_nascimento: '',
+  foto_url: '',
 };
 
 export default (state = initialState, action) => {
@@ -30,6 +31,8 @@ export default (state = initialState, action) => {
       return { ...state, instituicao: action.payload.instituicao };
     case 'SET_DATANASC':
       return { ...state, data_nascimento: action.payload.data_nascimento };
+    case 'SET_FOTO':
+      return { ...state, foto_url: action.payload.foto_url };
     case 'SIGNOUT_REQUEST':
       return { initialState };
     default:

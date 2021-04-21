@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   LoginArea,
@@ -14,10 +14,10 @@ import {
   SigninText,
 } from './styled';
 import Lottie from 'lottie-react-native';
-import {Platform, Alert} from 'react-native';
-import {connect} from 'react-redux';
+import { Platform, Alert } from 'react-native';
+import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-import {StackActions, NavigationActions} from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 import Api from '../../Api';
 
@@ -48,13 +48,14 @@ const Page = (props) => {
       props.setBio(userData.bio);
       props.setInstituicao(userData.instituicao);
       props.setDatanasc(userData.data_nascimento);
+      props.setFoto(userData.foto);
 
       // Adicionar aulas
 
       props.navigation.dispatch(
         StackActions.reset({
           index: 0,
-          actions: [NavigationActions.navigate({routeName: 'AppTab'})],
+          actions: [NavigationActions.navigate({ routeName: 'AppTab' })],
         }),
       );
     } else {
@@ -66,7 +67,7 @@ const Page = (props) => {
     <Container behavior={Platform.OS === 'ios' ? 'padding' : null}>
       <Label size="28">Bem-vindo(a) ao AMPORAL!</Label>
       <Lottie
-        style={{width: '80%', marginBottom: -30}}
+        style={{ width: '80%', marginBottom: -30 }}
         resizeMode="contain"
         source={mathTeatcher}
         autoPlay
@@ -122,25 +123,27 @@ const mapStateToProps = (state) => {
     bio: state.userReducer.bio,
     instituicao: state.userReducer.instituicao,
     data_nascimento: state.userReducer.data_nascimento,
+    foto_url: state.userReducer.foto_url,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setToken: (token) => dispatch({type: 'SET_TOKEN', payload: {token}}),
+    setToken: (token) => dispatch({ type: 'SET_TOKEN', payload: { token } }),
     setUsername: (username) =>
-      dispatch({type: 'SET_USERNAME', payload: {username}}),
-    setPass: (password) => dispatch({type: 'SET_PASS', payload: {password}}),
+      dispatch({ type: 'SET_USERNAME', payload: { username } }),
+    setPass: (password) => dispatch({ type: 'SET_PASS', payload: { password } }),
     setFirstName: (first_name) =>
-      dispatch({type: 'SET_FNAME', payload: {first_name}}),
+      dispatch({ type: 'SET_FNAME', payload: { first_name } }),
     setLastName: (last_name) =>
-      dispatch({type: 'SET_LNAME', payload: {last_name}}),
-    setEmail: (email) => dispatch({type: 'SET_EMAIL', payload: {email}}),
-    setBio: (bio) => dispatch({type: 'SET_BIO', payload: {bio}}),
+      dispatch({ type: 'SET_LNAME', payload: { last_name } }),
+    setEmail: (email) => dispatch({ type: 'SET_EMAIL', payload: { email } }),
+    setBio: (bio) => dispatch({ type: 'SET_BIO', payload: { bio } }),
     setInstituicao: (instituicao) =>
-      dispatch({type: 'SET_INSTITUICAO', payload: {instituicao}}),
+      dispatch({ type: 'SET_INSTITUICAO', payload: { instituicao } }),
     setDatanasc: (data_nascimento) =>
-      dispatch({type: 'SET_DATANASC', payload: {data_nascimento}}),
+      dispatch({ type: 'SET_DATANASC', payload: { data_nascimento } }),
+    setFoto: (foto_url) => dispatch({ type: 'SET_FOTO', payload: { foto_url } }),
   };
 };
 
