@@ -8,7 +8,7 @@ const persistedReducer = persistReducer(
   {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['userReducer', 'aulaReducer'],
+    whitelist: ['userReducer', 'aulaReducer', 'comentariosReducer'],
   },
   Reducers,
 );
