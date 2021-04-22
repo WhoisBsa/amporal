@@ -51,6 +51,10 @@ const Page = (props) => {
       props.setFoto(userData.foto);
 
       // Adicionar aulas
+      props.setId(userData.aula_atual.id);
+      props.setLink(userData.aula_atual.link);
+      props.setMaterial(userData.aula_atual.material);
+      props.setTitulo(userData.aula_atual.titulo);
 
       props.navigation.dispatch(
         StackActions.reset({
@@ -113,18 +117,7 @@ const Page = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    token: state.userReducer.token,
-    username: state.userReducer.username,
-    password: state.userReducer.password,
-    first_name: state.userReducer.first_name,
-    last_name: state.userReducer.last_name,
-    email: state.userReducer.email,
-    bio: state.userReducer.bio,
-    instituicao: state.userReducer.instituicao,
-    data_nascimento: state.userReducer.data_nascimento,
-    foto_url: state.userReducer.foto_url,
-  };
+  return { };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -144,6 +137,10 @@ const mapDispatchToProps = (dispatch) => {
     setDatanasc: (data_nascimento) =>
       dispatch({ type: 'SET_DATANASC', payload: { data_nascimento } }),
     setFoto: (foto_url) => dispatch({ type: 'SET_FOTO', payload: { foto_url } }),
+    setId: (id) => dispatch({ type: 'SET_ID', payload: { id}}),
+    setLink: (link) => dispatch({ type: 'SET_LINK', payload: { link } }),
+    setMaterial: (material) => dispatch({ type: 'SET_MATERIAL', payload: { material } }),
+    setTitulo: (titulo) => dispatch({ type: 'SET_TITULO', payload: { titulo } }),
   };
 };
 
