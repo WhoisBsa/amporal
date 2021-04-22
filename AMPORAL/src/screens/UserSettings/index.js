@@ -29,10 +29,7 @@ const Page = (props) => {
   const [bio, setBio] = useState(props.bio);
   const [instituicao, setInstituicao] = useState(props.instituicao);
   const [data_nascimento, setDatanasc] = useState(props.data_nascimento);
-  const [filePath, setFilePath] = useState({});
 
-  console.log('Foto filepath: ' + filePath.uri);
-  console.log('Foto props: ' + props.foto_url);
   const handleExitButton = () => {
     Alert.alert(
       'Sair do AMPORAL',
@@ -116,7 +113,6 @@ const Page = (props) => {
   };
 
   const handleChangeProfilePic = () => {
-    console.log('Url foto 1: ' + props.foto_url);
     Alert.alert(
       'Alterar Foto de perfil',
       'Deseja alterar sua foto de perfil?',
@@ -138,8 +134,6 @@ const Page = (props) => {
               },
             };
             launchImageLibrary(options, (response) => {
-              console.log('Response = ', response);
-
               if (response.didCancel) {
                 console.log('User cancelled image picker');
               } else if (response.error) {
@@ -151,9 +145,7 @@ const Page = (props) => {
                 );
                 alert(response.customButton);
               } else {
-                let source = response;
-                setFilePath(source);
-
+                props.setFoto(response.uri);
               }
             });
           },
@@ -169,9 +161,6 @@ const Page = (props) => {
       },
     );
 
-    props.setFoto(filePath.uri);
-
-    console.log('Url da foto: ' + props.foto_url);
   };
 
   return (
@@ -180,12 +169,7 @@ const Page = (props) => {
         <Icon name="exit" size={25} color={LIGHT} />
       </ConfigButtonArea>
       <Box onPress={handleChangeProfilePic}>
-        {!filePath.uri && (
-          <ImageProfile source={{ uri: props.foto_url }} />
-        ) || (
-            <ImageProfile source={{ uri: filePath.uri }} />
-          )}
-
+        <ImageProfile source={{ uri: props.foto_url }} />
       </Box>
 
       <DataView
