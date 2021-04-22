@@ -16,7 +16,7 @@ export const Label = styled.Text`
   font-size: ${(props) => props.size || '16'}px;
   color: ${LIGHT};
   font-weight: bold;
-  margin: 20px 0px 10px 0px;
+  margin: 3% 0 0 0;
 `;
 
 export const Input = styled.TextInput`

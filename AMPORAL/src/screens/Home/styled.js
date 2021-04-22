@@ -8,7 +8,7 @@ export const Container = styled.SafeAreaView`
 export const Header = styled.Text`
   font-weight: bold;
   font-size: 24px;
-  margin: 40px 20px;
+  margin: 2.5% 5%;
 `;
 
 export const StartButton = styled.TouchableHighlight`
@@ -19,7 +19,7 @@ export const StartButton = styled.TouchableHighlight`
   border-radius: 10px;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 3% 0;
 `;
 
 export const StartText = styled.Text`

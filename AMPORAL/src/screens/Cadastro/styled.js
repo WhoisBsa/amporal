@@ -16,7 +16,7 @@ export const Label = styled.Text`
   font-size: ${(props) => props.size || '16'}px;
   color: ${LIGHT};
   font-weight: bold;
-  margin: 20px 0px 10px 0px;
+  margin: 3% 0 0 0;
 `;
 
 export const Input = styled.TextInput`
@@ -37,7 +37,7 @@ export const ActionButtonArea = styled.TouchableHighlight`
   width: 100%;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 10%;
 `;
 
 export const ActionButtonText = styled.Text`
@@ -50,7 +50,8 @@ export const SigninArea = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: center;
-  margin-top: 10%;
+  margin-top: 7%;
+  margin-bottom: -14%
 `;
 
 export const SigninText = styled.Text`
