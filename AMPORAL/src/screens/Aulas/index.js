@@ -4,24 +4,45 @@ import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import YouTube from 'react-native-youtube';
 
-import { Container, Header, StartButton, StartText } from './styled';
+import { Container, Header, ActionButtonArea, ActionButtonText, ButtonArea, CommentsArea, CommentArea, CommentText } from './styled';
 import { LIGHT } from '../../styles/colors';
 import { API_KEY } from '@env';
 
 const Page = (props) => {
-  console.log(props);
-  return (
-    <Container>
-      <Header>{props.aula_titulo}</Header>
 
-      <YouTube
-        apiKey={API_KEY}
-        videoId={props.aula_link} // The YouTube video ID
-        loop // control whether the video should loop when ended
-        style={{ alignSelf: 'stretch', height: 300 }}
+  const commentData = props.comentarios[0].comentarios;
+  
+return (
+  <Container>
+    <Header>Aula {props.aula_id} - {props.aula_titulo}</Header>
+
+    <YouTube
+      apiKey={API_KEY}
+      videoId={props.aula_link} // The YouTube video ID
+      loop // control whether the video should loop when ended
+      style={{ alignSelf: 'stretch', height: 300 }}
+    />
+
+    <ButtonArea>
+      <ActionButtonArea>
+        <ActionButtonText>Anterior</ActionButtonText>
+      </ActionButtonArea>
+
+      <ActionButtonArea color={1}>
+        <ActionButtonText>Próxima</ActionButtonText>
+      </ActionButtonArea>
+    </ButtonArea>
+
+    <CommentsArea>
+    <Header>Comentarios da Aula:</Header>
+      <CommentArea 
+        data={commentData}
+        renderItem={({item}) => <CommentText>{item.comentario}  </CommentText>}
       />
-    </Container>
-  );
+    </CommentsArea>
+
+  </Container>
+);
 };
 
 Page.navigationOptions = ({ navigation }) => {
@@ -64,10 +85,12 @@ Page.navigationOptions = ({ navigation }) => {
 
 const mapStateToProps = (state) => {
   return {
+    token: state.userReducer.token,
     aula_id: state.aulaReducer.id,
     aula_link: state.aulaReducer.link,
     aula_material: state.aulaReducer.material,
     aula_titulo: state.aulaReducer.titulo,
+    comentarios: state.comentariosReducer.comentarios,
   };
 };
 
