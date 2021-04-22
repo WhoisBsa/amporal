@@ -55,6 +55,11 @@ const Page = (props) => {
       props.setLink(userData.aula_atual.link);
       props.setMaterial(userData.aula_atual.material);
       props.setTitulo(userData.aula_atual.titulo);
+      
+      // Adicionar comentarios da aula
+      let comentarios = await Api.getComments(json.token);
+      console.log(comentarios);
+      props.addComentario(comentarios);
 
       props.navigation.dispatch(
         StackActions.reset({
@@ -141,6 +146,7 @@ const mapDispatchToProps = (dispatch) => {
     setLink: (link) => dispatch({ type: 'SET_LINK', payload: { link } }),
     setMaterial: (material) => dispatch({ type: 'SET_MATERIAL', payload: { material } }),
     setTitulo: (titulo) => dispatch({ type: 'SET_TITULO', payload: { titulo } }),
+    addComentario: (comentarios) => dispatch({ type: 'ADD_COMENTARIO', payload: { comentarios } }),
   };
 };
 
