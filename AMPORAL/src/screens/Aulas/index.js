@@ -1,49 +1,107 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import YouTube from 'react-native-youtube';
+import { withNavigationFocus } from 'react-navigation'
 
-import { Container, Header, ActionButtonArea, ActionButtonText, ButtonArea, CommentsArea, CommentArea, CommentText } from './styled';
+
+import {
+  Container,
+  Header,
+  ActionButtonArea,
+  ActionButtonText,
+  ButtonArea,
+  CommentsArea,
+  CommentList,
+  CommentText,
+} from './styled';
 import { LIGHT } from '../../styles/colors';
 import { API_KEY } from '@env';
 
-const Page = (props) => {
+const YTPlayer = (props) => {
+  const [height, setHeight] = useState(250);
 
-  const commentData = props.comentarios[0].comentarios;
-  
-return (
-  <Container>
-    <Header>Aula {props.aula_id} - {props.aula_titulo}</Header>
+  const handleReady = () => {
+    setTimeout(() => setHeight(251), 500);
+  }
 
+  console.log(props.videoId);
+  return (
     <YouTube
+      controls={1}
       apiKey={API_KEY}
-      videoId={props.aula_link} // The YouTube video ID
-      loop // control whether the video should loop when ended
-      style={{ alignSelf: 'stretch', height: 300 }}
+      videoId={props.videoId}
+      resumePlayAndroid={false}
+      style={{
+        alignSelf: 'stretch',
+        width: "100%",
+        height: height
+      }}
+      onReady={handleReady}
     />
+  );
+}
 
-    <ButtonArea>
-      <ActionButtonArea>
-        <ActionButtonText>Anterior</ActionButtonText>
-      </ActionButtonArea>
+const Page = (props) => {
+  const commentData = props.comentarios[0].comentarios;
 
-      <ActionButtonArea color={1}>
-        <ActionButtonText>Próxima</ActionButtonText>
-      </ActionButtonArea>
-    </ButtonArea>
+  const getVideoScreen = () => {
+    return (
+      <>
+        <ButtonArea>
+          <ActionButtonArea>
+            <ActionButtonText>
+              <Icon
+                name="arrow-back-circle-outline"
+                size={40}
+                color={LIGHT}
+              />
+            </ActionButtonText>
+          </ActionButtonArea>
 
-    <CommentsArea>
-    <Header>Comentarios da Aula:</Header>
-      <CommentArea 
+          <ActionButtonArea color={1}>
+            <ActionButtonText>
+              <Icon
+                name="arrow-forward-circle-outline"
+                size={40}
+                color={LIGHT}
+              />
+            </ActionButtonText>
+          </ActionButtonArea>
+        </ButtonArea>
+
+        <Header>Comentários da Aula:</Header>
+      </>
+    );
+  };
+
+  const ListItems = ({ item }) => {
+    return (
+      <CommentsArea>
+        <Icon name="person-circle" size={40} />
+        <CommentText>{item.comentario} </CommentText>
+      </CommentsArea>
+    );
+  }
+
+  return (props.isFocused && (
+    <Container>
+      <Header>
+        Aula {props.aula_id} - {props.aula_titulo}
+      </Header>
+
+      <YTPlayer videoId={props.aula_link} />
+
+      <CommentList
         data={commentData}
-        renderItem={({item}) => <CommentText>{item.comentario}  </CommentText>}
+        renderItem={({ item }) => <ListItems item={item} />}
+        keyExtractor={(item, index) => item.id.toString()}
+        ListHeaderComponent={getVideoScreen}
       />
-    </CommentsArea>
-
-  </Container>
-);
-};
+    </Container>
+  ))
+}
 
 Page.navigationOptions = ({ navigation }) => {
   const ConfigButtonArea = styled.TouchableHighlight`
@@ -98,9 +156,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setId: (id) => dispatch({ type: 'SET_ID', payload: { id } }),
     setLink: (link) => dispatch({ type: 'SET_LINK', payload: { link } }),
-    setMaterial: (material) => dispatch({ type: 'SET_MATERIAL', payload: { material } }),
+    setMaterial: (material) =>
+      dispatch({ type: 'SET_MATERIAL', payload: { material } }),
     setTitulo: (titulo) => dispatch({ type: 'SET_TITULO', payload: { titulo } }),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Page);
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigationFocus(Page));
