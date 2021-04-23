@@ -58,7 +58,6 @@ const Page = (props) => {
       
       // Adicionar comentarios da aula
       let comentarios = await Api.getComments(json.token);
-      console.log(comentarios);
       props.addComentario(comentarios);
 
       props.navigation.dispatch(
