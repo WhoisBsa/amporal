@@ -84,5 +84,17 @@ export default {
     });
     const json = await req.json();
     return json;
-  }
+  },
+  getExercicios: async (token) => {
+    const req = await fetch(`${BASE_URL}/exercicio/get/all/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `token ${token}`,
+      },
+    });
+    const json = await req.json();
+    return json;
+  },
 };
