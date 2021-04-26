@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import YouTube from 'react-native-youtube';
 import { withNavigationFocus } from 'react-navigation'
 
-
 import {
   Container,
   Header,
@@ -26,7 +25,6 @@ const YTPlayer = (props) => {
     setTimeout(() => setHeight(251), 500);
   }
 
-  console.log(props.videoId);
   return (
     <YouTube
       controls={1}
@@ -60,7 +58,10 @@ const Page = (props) => {
             </ActionButtonText>
           </ActionButtonArea>
 
-          <ActionButtonArea color={1}>
+          <ActionButtonArea 
+            color={1} 
+            onPress={() => props.navigation.navigate('Exercicios')}
+            underlayColor="dodgerblue">
             <ActionButtonText>
               <Icon
                 name="arrow-forward-circle-outline"
@@ -153,13 +154,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    setId: (id) => dispatch({ type: 'SET_ID', payload: { id } }),
-    setLink: (link) => dispatch({ type: 'SET_LINK', payload: { link } }),
-    setMaterial: (material) =>
-      dispatch({ type: 'SET_MATERIAL', payload: { material } }),
-    setTitulo: (titulo) => dispatch({ type: 'SET_TITULO', payload: { titulo } }),
-  };
+  return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigationFocus(Page));
