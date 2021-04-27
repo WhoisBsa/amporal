@@ -61,7 +61,7 @@ const Page = (props) => {
   } else {
     return (
       <Container>
-        <Header>Carregando Exercicios...</Header>
+        <Header>Carregando Exercícios...</Header>
         <LoadingIcon size="large" color="#34F692" />
       </Container>
     )
