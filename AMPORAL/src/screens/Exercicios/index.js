@@ -31,23 +31,25 @@ const Page = (props) => {
   if (isLoaded) {
 
     const handleSubmitQuestions = () => {
-      if (respostas.length < 3) {
-        let count = 0;
-        count = alt1 === undefined ? count += 1 : count;
-        count = alt2 === undefined ? count += 1 : count;
-        count = alt3 === undefined ? count += 1 : count;
+      setRespostas([alt1, alt2, alt3])
+      let count = 0;
 
-        console.log(count, alt1);
-        // let count = alt4 === undefined ? count++ : count;
+      count = alt1 === undefined ? count += 1 : count;
+      count = alt2 === undefined ? count += 1 : count;
+      count = alt3 === undefined ? count += 1 : count;
+      // let count = alt4 === undefined ? count++ : count;
+      if (count !== 0) {
         Alert.alert(
           'Questões sem responder.',
           count > 1 ?
-          `Há ${count} questões não respondidas. Por favor responda todas as questões` 
-          : 
-          `Há ${count} questão não respondida. Por favor responda todas as questões`
-        )
+            `Há ${count} questões não respondidas. Por favor responda todas as questões`
+            :
+            `Há ${count} questão não respondida. Por favor responda todas as questões`
+        );
       } else {
-        setRespostas([alt1, alt2, alt3])
+        console.log('====================================');
+        console.log(respostas);
+        console.log('====================================');
       }
     }
 
