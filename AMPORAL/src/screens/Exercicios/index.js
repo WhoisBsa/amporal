@@ -21,46 +21,29 @@ const Page = (props) => {
     getExercicios();
   }, []);
 
-  console.log('====================================');
-  console.log(respostas);
-  console.log('====================================');
-
-  const ListItems = ({ item }) => {
-    return (
-      <>
-        <Header>{item.questao}</Header>
-        <RadioButton.Group 
-          onValueChange={newValue => setRespostas(...respostas, newValue)} respostas={respostas}>
-            <>
-            <AltText>{item.alt1}</AltText>
-            <RadioButton respostas="a" />
-            </>
-            <>
-            <AltText>{item.alt2}</AltText>
-            <RadioButton respostas="b" />
-            </>
-            <>
-            <AltText>{item.alt3}</AltText>
-            <RadioButton respostas="c" />
-            </>
-            <>
-            <AltText>{item.alt4}</AltText>
-            <RadioButton respostas="d" />
-            </>
-        </RadioButton.Group>
-      </>
-    )
-  }
-
-  const getActionSaveButton = () => {
-    return (
-      <SaveButtonArea>
-        <SaveButtonText>ENVIAR RESPOSTAS</SaveButtonText>
-      </SaveButtonArea>
-    )
-  }
-
   if (isLoaded) {
+
+    const handleSubmitQuestions = () => {
+      if (respostas.length < 3) {
+        let count = 0;
+        count = alt1 === undefined ? count += 1 : count;
+        count = alt2 === undefined ? count += 1 : count;
+        count = alt3 === undefined ? count += 1 : count;
+
+        console.log(count, alt1);
+        // let count = alt4 === undefined ? count++ : count;
+        Alert.alert(
+          'Questões sem responder.',
+          count > 1 ?
+          `Há ${count} questões não respondidas. Por favor responda todas as questões` 
+          : 
+          `Há ${count} questão não respondida. Por favor responda todas as questões`
+        )
+      } else {
+        setRespostas([alt1, alt2, alt3])
+      }
+    }
+
     return (
       <Container>
         <ExerciciosList
