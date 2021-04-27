@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { RadioButton } from 'react-native-paper';
+import { Alert } from 'react-native';
 
-import { Container, LoadingIcon, Header, ExerciciosList, AltText, SaveButtonArea, SaveButtonText } from './styled';
+import { Container, LoadingIcon, Header, QuestionView, AltText, SaveButtonArea, SaveButtonText } from './styled';
 import Api from '../../Api';
 
 const Page = (props) => {
@@ -11,6 +12,12 @@ const Page = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [exercicios, setExercicios] = useState({});
   const [respostas, setRespostas] = useState([]);
+  const [alt1, setAlt1] = useState();
+  const [alt2, setAlt2] = useState();
+  const [alt3, setAlt3] = useState();
+  // const [alt4, setAlt4] = useState(props.respostas[3]);
+
+  console.log(respostas);
 
   useEffect(() => {
     const getExercicios = async () => {
@@ -46,12 +53,92 @@ const Page = (props) => {
 
     return (
       <Container>
-        <ExerciciosList
-          data={exercicios}
-          renderItem={({ item }) => <ListItems item={item} />}
-          keyExtractor={(item, index) => item.id.toString()}
-          ListFooterComponent={getActionSaveButton}
-        />
+        <Header>{exercicios[0].questao}</Header>
+        <RadioButton.Group
+          value={alt1}
+          onValueChange={newValue => setAlt1(newValue)}>
+          <QuestionView>
+            <RadioButton value="a" />
+            <AltText>{exercicios[0].alt1}</AltText>
+          </QuestionView>
+          <QuestionView>
+            <RadioButton value="b" />
+            <AltText>{exercicios[0].alt2}</AltText>
+          </QuestionView>
+          <QuestionView>
+            <RadioButton value="c" />
+            <AltText>{exercicios[0].alt3}</AltText>
+          </QuestionView>
+          <QuestionView>
+            <RadioButton value="d" />
+            <AltText>{exercicios[0].alt4}</AltText>
+          </QuestionView>
+        </RadioButton.Group>
+
+        <Header>{exercicios[1].questao}</Header>
+        <RadioButton.Group
+          value={alt2}
+          onValueChange={newValue => setAlt2(newValue)} value={alt2}>
+          <QuestionView>
+            <RadioButton value="a" />
+            <AltText>{exercicios[1].alt1}</AltText>
+          </QuestionView>
+          <QuestionView>
+            <RadioButton value="b" />
+            <AltText>{exercicios[1].alt2}</AltText>
+          </QuestionView>
+          <QuestionView>
+            <RadioButton value="c" />
+            <AltText>{exercicios[1].alt3}</AltText>
+          </QuestionView>
+          <QuestionView>
+            <RadioButton value="d" />
+            <AltText>{exercicios[1].alt4}</AltText>
+          </QuestionView>
+        </RadioButton.Group>
+
+        <Header>{exercicios[2].questao}</Header>
+        <RadioButton.Group
+          value={alt3}
+          onValueChange={newValue => setAlt3(newValue)} value={alt3}>
+          <QuestionView>
+            <RadioButton value="a" />
+            <AltText>{exercicios[2].alt1}</AltText>
+          </QuestionView>
+          <QuestionView>
+            <RadioButton value="b" />
+            <AltText>{exercicios[2].alt2}</AltText>
+          </QuestionView>
+          <QuestionView>
+            <RadioButton value="c" />
+            <AltText>{exercicios[2].alt3}</AltText>
+          </QuestionView>
+          <QuestionView>
+            <RadioButton value="d" />
+            <AltText>{exercicios[2].alt4}</AltText>
+          </QuestionView>
+        </RadioButton.Group>
+
+        {/* <RadioButton.Group
+        value={alt4}
+        onValueChange={newValue => setAlt4(newValue)} value={alt4}>
+        <QuestionView>
+          <RadioButton value="a" />
+          <AltText>{exercicios[3].alt1}</AltText>
+        </QuestionView>
+        <QuestionView>
+          <RadioButton value="b" />
+          <AltText>{exercicios[3].alt2}</AltText>
+        </QuestionView>
+        <QuestionView>
+          <RadioButton value="c" />
+          <AltText>{exercicios[3].alt3}</AltText>
+        </QuestionView>
+        <QuestionView>
+          <RadioButton value="d" />
+          <AltText>{exercicios[3].alt4}</AltText>
+        </QuestionView>
+      </RadioButton.Group> */}
 
         <SaveButtonArea onPress={handleSubmitQuestions}>
           <SaveButtonText>ENVIAR RESPOSTAS</SaveButtonText>
