@@ -53,6 +53,9 @@ const Page = (props) => {
           ListFooterComponent={getActionSaveButton}
         />
 
+        <SaveButtonArea onPress={handleSubmitQuestions}>
+          <SaveButtonText>ENVIAR RESPOSTAS</SaveButtonText>
+        </SaveButtonArea>
       </Container>
     );
   } else {
