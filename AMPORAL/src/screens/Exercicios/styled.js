@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {LIGHT, PRIMARY, SECONDARY} from '../../styles/colors';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.ScrollView`
   flex: 1;
 `;
 
@@ -33,7 +33,10 @@ export const LoadingIcon = styled.ActivityIndicator`
   margin-top: 30px;
 `;
 
-export const ExerciciosList = styled.FlatList``;
+export const QuestionView = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
 
 export const AltText = styled.Text`
   color: ${LIGHT};
