@@ -12,12 +12,11 @@ const Page = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [exercicios, setExercicios] = useState({});
   const [respostas, setRespostas] = useState([]);
+  const [resultado, setResultado] = useState();
   const [alt1, setAlt1] = useState();
   const [alt2, setAlt2] = useState();
   const [alt3, setAlt3] = useState();
   // const [alt4, setAlt4] = useState(props.respostas[3]);
-
-  console.log(respostas);
 
   useEffect(() => {
     const getExercicios = async () => {
@@ -30,7 +29,7 @@ const Page = (props) => {
 
   if (isLoaded) {
 
-    const handleSubmitQuestions = () => {
+    const handleSubmitQuestions = async () => {
       setRespostas([alt1, alt2, alt3])
       let count = 0;
 
@@ -47,9 +46,11 @@ const Page = (props) => {
             `Há ${count} questão não respondida. Por favor responda todas as questões`
         );
       } else {
-        console.log('====================================');
-        console.log(respostas);
-        console.log('====================================');
+        let json = await Api.sendAnswers(props.token, [alt1, alt2, alt3]);
+
+        setResultado(json)
+
+        console.log('Resultado: ' + JSON.stringify(json));
       }
     }
 
