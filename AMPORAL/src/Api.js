@@ -97,4 +97,33 @@ export default {
     const json = await req.json();
     return json;
   },
+  sendAnswers: async (token, answers) => {
+    console.log('====================================');
+    console.log('Na api: ' + JSON.stringify(answers));
+    console.log('====================================');
+    const req = await fetch(`${BASE_URL}/exercicio/post/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `token ${token}`,
+      },
+      body: [
+        {
+          "id": 2,
+          "resposta": answers[0]
+        },
+        {
+          "id": 3,
+          "resposta": answers[1]
+        },
+        {
+          "id": 4,
+          "resposta": answers[2]
+        }
+      ],
+    });
+    const json = await req.json();
+    return json;
+  }
 };
