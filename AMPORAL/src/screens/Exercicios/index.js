@@ -50,8 +50,70 @@ const Page = (props) => {
 
         setResultado(json)
 
-        console.log('Resultado: ' + JSON.stringify(json));
+        if (json.message === 'aprovado') {
+          Alert.alert(
+            'Parabéns você foi aprovado! 🤩',
+            'Você está pronto para ir para a próxima aula.',
+            [
+              {
+                text: 'Pŕoxima aula',
+                onPress: async () => {
+                  await Api.nextClass(props.token);
+
+                  let json = await Api.getClass(props.token);
+
+                  console.log(json);
+
+                  props.setId(json.id);
+                  props.setLink(json.link);
+                  props.setMaterial(json.material);
+                  props.setTitulo(json.titulo);
+                  props.navigation.navigate('Aulas');
+                },
+              },
+            ],
+            {
+              cancelable: false,
+              onDismiss: () => { },
+            });
+        }
+        else {
+          Alert.alert(
+            'Você não atingiu os 60% 😞',
+            'Infelizmente você terá que refazer os exercícios.\n\n💡 Dica: reveja a aula caso for nescessário.',
+            [
+              {
+                text: 'Refazer Teste',
+                onPress: () => {
+                  setAlt1(undefined);
+                  setAlt2(undefined);
+                  setAlt3(undefined);
+                },
+              },
+              {
+                text: 'Rever Aula',
+                onPress: () => {
+                  props.navigation.navigate('Aulas');
+                }
+              },
+            ],
+            {
+              cancelable: false,
+              onDismiss: () => { },
+            });
+        }
       }
+    }
+
+    const proximaAula = async () => {
+      await Api.nextClass(props.token);
+
+      let json = await Api.getClass(props.token);
+
+      props.setId(json.id);
+      props.setLink(json.link);
+      props.setMaterial(json.material);
+      props.setTitulo(json.titulo);
     }
 
     return (
@@ -181,7 +243,6 @@ const mapStateToProps = (state) => {
   return {
     token: state.userReducer.token,
     aulaId: state.aulaReducer.id,
-    aula_titulo: state.aulaReducer.titulo,
   };
 };
 
