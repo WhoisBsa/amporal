@@ -124,9 +124,6 @@ export default {
     return json;
   },
   nextClass: async (token) => {
-    console.log('====================================');
-    console.log('Na proxima aula');
-    console.log('====================================');
     await fetch(`${BASE_URL}/aula/proxima/`, {
       method: 'GET',
       headers: {
