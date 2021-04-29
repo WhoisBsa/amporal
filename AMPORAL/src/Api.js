@@ -122,5 +122,40 @@ export default {
     });
     const json = await req.json();
     return json;
-  }
+  },
+  nextClass: async (token) => {
+    console.log('====================================');
+    console.log('Na proxima aula');
+    console.log('====================================');
+    await fetch(`${BASE_URL}/aula/proxima/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `token ${token}`,
+      },
+    });
+  },
+  previousClass: async (token) => {
+    await fetch(`${BASE_URL}/aula/anterior/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `token ${token}`,
+      },
+    });
+  },
+  getClass: async (token) => {
+    const req = await fetch(`${BASE_URL}/aula/get/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `token ${token}`,
+      },
+    });
+    const json = await req.json();
+    return json;
+  },
 };
