@@ -22,7 +22,7 @@ const YTPlayer = (props) => {
   const [height, setHeight] = useState(250);
 
   const handleReady = () => {
-    setTimeout(() => setHeight(251), 500);
+    setTimeout(() => setHeight(251), 1);
   }
 
   return (
