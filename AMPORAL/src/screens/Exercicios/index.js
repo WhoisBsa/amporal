@@ -62,8 +62,6 @@ const Page = (props) => {
 
                   let json = await Api.getClass(props.token);
 
-                  console.log(json);
-
                   props.setId(json.id);
                   props.setLink(json.link);
                   props.setMaterial(json.material);
