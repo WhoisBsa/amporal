@@ -17,6 +17,8 @@ import {
 } from './styled';
 import { LIGHT, RED } from '../../styles/colors';
 import { API_KEY } from '@env';
+import Api from '../../Api';
+import { Alert } from 'react-native';
 
 const YTPlayer = (props) => {
   const [height, setHeight] = useState(250);
@@ -44,12 +46,40 @@ const YTPlayer = (props) => {
 const Page = (props) => {
   const commentData = props.comentarios[0].comentarios;
 
+  const handlePreviousVideo = async () => {
+    if (props.aula_id === 1) {
+      Alert.alert(
+        'Não há aulas anteriores.',
+        'Essa é a sua primeira aula. Veja os videos e faça os exercícios para aumentar seu progresso.',
+        [
+          {
+            text: 'OK',
+            onPress: () => { },
+          }
+        ],
+        {
+          cancelable: true,
+        }
+      )
+    } else {
+      await Api.previousClass(props.token);
+
+      let json = await Api.getClass(props.token);
+
+      props.setId(json.id);
+      props.setLink(json.link);
+      props.setMaterial(json.material);
+      props.setTitulo(json.titulo);
+      props.navigation.navigate('Aulas');
+    }           
+  }
+
   const getVideoScreen = () => {
     return (
       <>
         <ButtonArea>
           <ActionButtonArea
-            onPress={() => props.navigation.navigate('Exercicios')}
+            onPress={handlePreviousVideo}
             underlayColor={RED}
           >
             <ActionButtonText>
@@ -157,7 +187,13 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    setId: (id) => dispatch({ type: 'SET_ID', payload: { id } }),
+    setLink: (link) => dispatch({ type: 'SET_LINK', payload: { link } }),
+    setMaterial: (material) =>
+      dispatch({ type: 'SET_MATERIAL', payload: { material } }),
+    setTitulo: (titulo) => dispatch({ type: 'SET_TITULO', payload: { titulo } }),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigationFocus(Page));
