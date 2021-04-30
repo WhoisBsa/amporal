@@ -15,7 +15,7 @@ import {
   CommentList,
   CommentText,
 } from './styled';
-import { LIGHT } from '../../styles/colors';
+import { LIGHT, RED } from '../../styles/colors';
 import { API_KEY } from '@env';
 
 const YTPlayer = (props) => {
@@ -48,7 +48,10 @@ const Page = (props) => {
     return (
       <>
         <ButtonArea>
-          <ActionButtonArea>
+          <ActionButtonArea
+            onPress={() => props.navigation.navigate('Exercicios')}
+            underlayColor={RED}
+          >
             <ActionButtonText>
               <Icon
                 name="arrow-back-circle-outline"
@@ -58,8 +61,8 @@ const Page = (props) => {
             </ActionButtonText>
           </ActionButtonArea>
 
-          <ActionButtonArea 
-            color={1} 
+          <ActionButtonArea
+            color={1}
             onPress={() => props.navigation.navigate('Exercicios')}
             underlayColor="dodgerblue">
             <ActionButtonText>
@@ -132,7 +135,7 @@ Page.navigationOptions = ({ navigation }) => {
       borderBottomRightRadius: 50,
     },
     headerTitleStyle: {
-      color: '#EEF8FF',
+      color: LIGHT,
       fontWeight: 'bold',
     },
     headerRight: () => <ConfigButton />,
