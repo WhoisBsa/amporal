@@ -1,2 +1,2 @@
 # amporal
-Linear algebra mobile app for higher education students
+Mobile linear algebra application for higher education students.
