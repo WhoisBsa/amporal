@@ -97,7 +97,7 @@ export default {
     const json = await req.json();
     return json;
   },
-  sendAnswers: async (token, answers) => {
+  sendAnswers: async (token, answers, exercicios) => {
     const req = await fetch(`${BASE_URL}/exercicio/post/`, {
       method: 'POST',
       headers: {
@@ -107,16 +107,20 @@ export default {
       },
       body: JSON.stringify([
         {
-          id: 2,
+          id: exercicios[0].id,
           resposta: answers[0]
         },
         {
-          id: 3,
+          id: exercicios[1].id,
           resposta: answers[1]
         },
         {
-          id: 4,
+          id: exercicios[2].id,
           resposta: answers[2]
+        },
+        {
+          id: exercicios[3].id,
+          resposta: answers[3]
         }
       ])
     });
